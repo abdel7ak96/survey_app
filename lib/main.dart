@@ -27,8 +27,7 @@ class AuthenticationScreen extends StatelessWidget {
     return Scaffold(
         backgroundColor: Colors.white,
         body: SafeArea(
-          child: ListView(
-            children: [
+          child: ListView(children: [
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
@@ -97,12 +96,25 @@ class AuthenticationScreen extends StatelessWidget {
               ),
             ),
           ]),
-        ));
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButton: FloatingActionButton(
+          onPressed: () => {},
+          child: Icon(Icons.double_arrow_rounded),
+          backgroundColor: Color.fromRGBO(58, 45, 119, 1),
+          elevation: 0,
+        ),
+        bottomNavigationBar: BottomAppBar(
+          shape: CircularNotchedRectangle(),
+          color: Color.fromRGBO(58, 45, 119, 1),
+          child: SizedBox(height: 50.0),
+        )
+        );
   }
 }
 
 class _InputField extends StatelessWidget {
-  const _InputField({Key? key, this.hintText=""}) : super(key: key);
+  const _InputField({Key? key, this.hintText = ""}) : super(key: key);
 
   final String hintText;
 
