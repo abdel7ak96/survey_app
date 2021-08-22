@@ -20,13 +20,29 @@ class _WelcomeScreensState extends State<WelcomeScreens> {
     return Scaffold(
       body: SafeArea(
           child: PageView(
-            onPageChanged: (index) {
-              setState(() {
-                _currentPageIndex = index;
-              });
-            },
+        onPageChanged: (index) {
+          setState(() {
+            _currentPageIndex = index;
+          });
+        },
         controller: _pageController,
-        children: [_FirstScreen(), _SecondScreen(), _ThirdScreen()],
+        children: [
+          _WelcomeScreen(
+              imagePath: "images/1.png",
+              title: "Bienvenue",
+              description:
+                  "Ce texte est un exemple de texte qui peut etre remplacer dans le meme espace"),
+          _WelcomeScreen(
+              imagePath: "images/2.png",
+              title: "Bienvenue",
+              description:
+                  "Ce texte est un exemple de texte qui peut etre remplacer dans le meme espace"),
+          _WelcomeScreen(
+              imagePath: "images/3.png",
+              title: "Bienvenue",
+              description:
+                  "Ce texte est un exemple de texte qui peut etre remplacer dans le meme espace")
+        ],
       )),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -48,12 +64,11 @@ class _WelcomeScreensState extends State<WelcomeScreens> {
             ElevatedButton(
               onPressed: () => {
                 setState(() {
-                  _currentPageIndex = (_currentPageIndex + 1) < 3 ? (_currentPageIndex + 1) : 2;
-                  _pageController.animateToPage(
-                    _currentPageIndex,
-                    duration: Duration(milliseconds: 500),
-                    curve: Curves.ease
-                  );
+                  _currentPageIndex =
+                      (_currentPageIndex + 1) < 3 ? (_currentPageIndex + 1) : 2;
+                  _pageController.animateToPage(_currentPageIndex,
+                      duration: Duration(milliseconds: 500),
+                      curve: Curves.ease);
                 })
               },
               child: Text("PASSER"),
@@ -69,8 +84,17 @@ class _WelcomeScreensState extends State<WelcomeScreens> {
   }
 }
 
-class _FirstScreen extends StatelessWidget {
-  const _FirstScreen({Key? key}) : super(key: key);
+class _WelcomeScreen extends StatelessWidget {
+  const _WelcomeScreen(
+      {Key? key,
+      this.imagePath = "images/1.png",
+      this.title = "Default Title",
+      this.description = "Default description"})
+      : super(key: key);
+
+  final String imagePath;
+  final String title;
+  final String description;
 
   @override
   Widget build(BuildContext context) {
@@ -83,98 +107,19 @@ class _FirstScreen extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.all(16.0),
-            child: Image.asset("images/1.png"),
+            child: Image.asset(imagePath),
           ),
           Column(
             children: [
               Text(
-                "Bienvenue",
+                title,
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 25.0,
                     color: Color.fromRGBO(58, 45, 119, 1)),
               ),
               SizedBox(height: 12.0),
-              Text(
-                  "Ce texte est un exemple de texte qui peut etre remplacer dans le meme espace",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontSize: 16.0, color: Color.fromRGBO(58, 45, 119, 1))),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _SecondScreen extends StatelessWidget {
-  const _SecondScreen({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(20.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Image.asset("images/2.png"),
-          ),
-          Column(
-            children: [
-              Text(
-                "Bienvenue",
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 25.0,
-                    color: Color.fromRGBO(58, 45, 119, 1)),
-              ),
-              SizedBox(height: 12.0),
-              Text(
-                  "Ce texte est un exemple de texte qui peut etre remplacer dans le meme espace",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontSize: 16.0, color: Color.fromRGBO(58, 45, 119, 1))),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _ThirdScreen extends StatelessWidget {
-  const _ThirdScreen({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(20.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Image.asset("images/3.png"),
-          ),
-          Column(
-            children: [
-              Text(
-                "Bienvenue",
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 25.0,
-                    color: Color.fromRGBO(58, 45, 119, 1)),
-              ),
-              SizedBox(height: 12.0),
-              Text(
-                  "Ce texte est un exemple de texte qui peut etre remplacer dans le meme espace",
+              Text(description,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       fontSize: 16.0, color: Color.fromRGBO(58, 45, 119, 1))),
