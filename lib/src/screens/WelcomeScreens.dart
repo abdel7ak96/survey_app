@@ -43,7 +43,7 @@ class _WelcomeScreensState extends State<WelcomeScreens> {
         ],
       )),
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(20.0),
+        padding: EdgeInsets.all(20.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,

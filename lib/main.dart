@@ -29,16 +29,34 @@ class QuestionScreen extends StatefulWidget {
 }
 
 class _QuestionScreenState extends State<QuestionScreen> {
-  // PageController _pageController = PageController();
+  PageController _pageController = PageController(initialPage: 0);
 
-  // int _currentPageIndex = 0;
+  int _currentPageIndex = 0;
+
+  void _previousPage() {
+    setState(() {
+      _currentPageIndex =
+          _currentPageIndex > 0 ? _currentPageIndex - 1 : _currentPageIndex;
+      _pageController.animateToPage(_currentPageIndex,
+          duration: Duration(milliseconds: 500), curve: Curves.ease);
+    });
+  }
+
+  void _nextPage() {
+    setState(() {
+      _currentPageIndex =
+          _currentPageIndex < 2 ? _currentPageIndex + 1 : _currentPageIndex;
+      _pageController.animateToPage(_currentPageIndex,
+          duration: Duration(milliseconds: 500), curve: Curves.ease);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-            onPressed: () => {},
+            onPressed: () => {_previousPage()},
             icon: Icon(
               Icons.arrow_back_ios,
               color: Color.fromRGBO(58, 45, 119, 1),
@@ -48,11 +66,13 @@ class _QuestionScreenState extends State<QuestionScreen> {
       ),
       body: SafeArea(
         child: PageView(
+          controller: _pageController,
+          physics: NeverScrollableScrollPhysics(),
           scrollDirection: Axis.vertical,
           children: [
-            TextQuestion(),
-            TextQuestion(),
-            TextQuestion(),
+            TextQuestion(nextPage: _nextPage),
+            TextQuestion(nextPage: _nextPage),
+            TextQuestion(nextPage: _nextPage),
           ],
         ),
       ),
@@ -61,7 +81,9 @@ class _QuestionScreenState extends State<QuestionScreen> {
 }
 
 class TextQuestion extends StatelessWidget {
-  const TextQuestion({Key? key}) : super(key: key);
+  const TextQuestion({Key? key, required this.nextPage}) : super(key: key);
+
+  final Function nextPage;
 
   @override
   Widget build(BuildContext context) {
@@ -110,9 +132,7 @@ class TextQuestion extends StatelessWidget {
                         fontSize: 14.0),
                   ),
                   TextFormField(
-                    decoration: InputDecoration(
-                      hintText: "Réponse"
-                    ),
+                    decoration: InputDecoration(hintText: "Réponse"),
                   )
                 ],
               ),
@@ -121,7 +141,9 @@ class TextQuestion extends StatelessWidget {
           SizedBox(height: 20.0),
           Center(
               child: ElevatedButton(
-            onPressed: () => {},
+            onPressed: () {
+              nextPage();
+            },
             child: Text("Suivant"),
             style:
                 ElevatedButton.styleFrom(primary: Color.fromRGBO(58, 45, 119, 1)),
