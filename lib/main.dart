@@ -70,9 +70,9 @@ class _QuestionScreenState extends State<QuestionScreen> {
           physics: NeverScrollableScrollPhysics(),
           scrollDirection: Axis.vertical,
           children: [
-            TextQuestion(nextPage: _nextPage),
-            TextQuestion(nextPage: _nextPage),
-            TextQuestion(nextPage: _nextPage),
+            _FormPart(formTitle: "EVALUATION CONNAISSANCES & ORGANISATION" ,nextPage: _nextPage),
+            _FormPart(formTitle: "ETAPE DE L'ETAT DES LIEUX POUR L'EVALUATION" ,nextPage: _nextPage),
+            _FormPart(nextPage: _nextPage),
           ],
         ),
       ),
@@ -80,10 +80,11 @@ class _QuestionScreenState extends State<QuestionScreen> {
   }
 }
 
-class TextQuestion extends StatelessWidget {
-  const TextQuestion({Key? key, required this.nextPage}) : super(key: key);
+class _FormPart extends StatelessWidget {
+  const _FormPart({Key? key, required this.nextPage, this.formTitle=""}) : super(key: key);
 
   final Function nextPage;
+  final String formTitle;
 
   @override
   Widget build(BuildContext context) {
@@ -91,12 +92,12 @@ class TextQuestion extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(14.0),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          true
+          formTitle != ""
               ? Container(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("TITRE DE LE FORMULAIRE",
+                      Text(formTitle,
                           style: TextStyle(
                             fontWeight: FontWeight.w500,
                             color: Color.fromRGBO(58, 45, 119, 1),
@@ -114,30 +115,7 @@ class TextQuestion extends StatelessWidget {
               // ignore: dead_code
               : SizedBox(height: 35.0),
           SizedBox(height: 35.0),
-          Container(
-            // height: 2000,
-            padding: EdgeInsets.all(12.0),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(14.0),
-                color: Colors.grey[200]),
-            child: Form(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "C'est ici ou la question doit etre posser?",
-                    style: TextStyle(
-                        color: Color.fromRGBO(58, 45, 119, 1),
-                        fontWeight: FontWeight.w500,
-                        fontSize: 14.0),
-                  ),
-                  TextFormField(
-                    decoration: InputDecoration(hintText: "Réponse"),
-                  )
-                ],
-              ),
-            ),
-          ),
+          _TextQuestion(),
           SizedBox(height: 20.0),
           Center(
               child: ElevatedButton(
@@ -145,10 +123,40 @@ class TextQuestion extends StatelessWidget {
               nextPage();
             },
             child: Text("Suivant"),
-            style:
-                ElevatedButton.styleFrom(primary: Color.fromRGBO(58, 45, 119, 1)),
+            style: ElevatedButton.styleFrom(
+                primary: Color.fromRGBO(58, 45, 119, 1)),
           ))
         ]),
+      ),
+    );
+  }
+}
+
+class _TextQuestion extends StatelessWidget {
+  const _TextQuestion({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(12.0),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(14.0), color: Colors.grey[200]),
+      child: Form(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "C'est ici ou la question doit etre posser?",
+              style: TextStyle(
+                  color: Color.fromRGBO(58, 45, 119, 1),
+                  fontWeight: FontWeight.w500,
+                  fontSize: 14.0),
+            ),
+            TextFormField(
+              decoration: InputDecoration(hintText: "Réponse"),
+            )
+          ],
+        ),
       ),
     );
   }
