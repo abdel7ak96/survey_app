@@ -9,9 +9,7 @@ class WelcomeScreens extends StatefulWidget {
 }
 
 class _WelcomeScreensState extends State<WelcomeScreens> {
-  PageController _pageController = PageController(
-    initialPage: 0,
-  );
+  PageController _pageController = PageController();
 
   int _currentPageIndex = 0;
 

@@ -14,6 +14,7 @@ class AuthenticationScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  // TODO : Refactor this code to use AppBar instead
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
