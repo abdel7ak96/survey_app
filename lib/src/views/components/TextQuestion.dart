@@ -20,7 +20,7 @@ class TextQuestion extends StatelessWidget {
             style: TextStyle(
                 color: Color.fromRGBO(58, 45, 119, 1),
                 fontWeight: FontWeight.w500,
-                fontSize: 14.0),
+                fontSize: 16.0),
           ),
           TextFormField(
             validator: (value) {

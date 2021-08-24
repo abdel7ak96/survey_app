@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import './components/TextQuestion.dart';
+import './components/RadioQuestion.dart';
 
 class QuestionsView extends StatefulWidget {
   const QuestionsView({Key? key}) : super(key: key);
@@ -110,8 +111,9 @@ class __FormPartState extends State<_FormPart> {
               key: _formKey,
               child: Column(
                 children: [
-                  TextQuestion(
+                  RadioQuestion(
                     question: "Avez-vous connaissance du RGPD ?",
+                    options: ["Oui", "Non"],
                   ),
                   TextQuestion(
                     question: "Question 2",
