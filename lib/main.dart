@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 // import 'src/screens/WelcomeScreens.dart';
-// import 'src/screens/AuthenticationScreen.dart';
+// import 'src/screens/IdentificationScreen.dart';
 
 void main() {
   runApp(MyApp());
@@ -70,8 +70,12 @@ class _QuestionScreenState extends State<QuestionScreen> {
           physics: NeverScrollableScrollPhysics(),
           scrollDirection: Axis.vertical,
           children: [
-            _FormPart(formTitle: "EVALUATION CONNAISSANCES & ORGANISATION" ,nextPage: _nextPage),
-            _FormPart(formTitle: "ETAPE DE L'ETAT DES LIEUX POUR L'EVALUATION" ,nextPage: _nextPage),
+            _FormPart(
+                formTitle: "EVALUATION CONNAISSANCES & ORGANISATION",
+                nextPage: _nextPage),
+            _FormPart(
+                formTitle: "ETAPE DE L'ETAT DES LIEUX POUR L'EVALUATION",
+                nextPage: _nextPage),
             _FormPart(nextPage: _nextPage),
           ],
         ),
@@ -81,7 +85,8 @@ class _QuestionScreenState extends State<QuestionScreen> {
 }
 
 class _FormPart extends StatelessWidget {
-  const _FormPart({Key? key, required this.nextPage, this.formTitle=""}) : super(key: key);
+  const _FormPart({Key? key, required this.nextPage, this.formTitle = ""})
+      : super(key: key);
 
   final Function nextPage;
   final String formTitle;
@@ -120,6 +125,8 @@ class _FormPart extends StatelessWidget {
           Center(
               child: ElevatedButton(
             onPressed: () {
+              // TODO : Check validator
+              // TODO : Save answers to state
               nextPage();
             },
             child: Text("Suivant"),
