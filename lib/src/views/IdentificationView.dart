@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 
-class IdentificationView extends StatelessWidget {
+class IdentificationView extends StatefulWidget {
   const IdentificationView({Key? key}) : super(key: key);
+
+  @override
+  _IdentificationViewState createState() => _IdentificationViewState();
+}
+
+class _IdentificationViewState extends State<IdentificationView> {
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -68,21 +75,36 @@ class IdentificationView extends StatelessWidget {
                         color: Color.fromRGBO(58, 45, 119, 1)),
                   ),
                   Form(
+                      key: _formKey,
                       child: Column(
-                    children: [
-                      _InputField(hintText: "Dénomination sociale *"),
-                      _InputField(hintText: "Effectif *"),
-                      _InputField(hintText: "Référent (représentant légal) *"),
-                    ],
-                  ))
+                        children: [
+                          _InputField(hintText: "Dénomination sociale *"),
+                          _InputField(hintText: "Effectif *"),
+                          _InputField(
+                              hintText: "Référent (représentant légal) *"),
+                        ],
+                      ))
                 ],
               ),
             ),
           ]),
         ),
+        // TODO : Make the floatingActionButton disappear when the keyboard is open
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: FloatingActionButton(
-          onPressed: () => {/*TODO : Implement form validation and routing*/},
+          onPressed: () => {
+            if (_formKey.currentState!.validate())
+              {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Success')),
+                )
+              }
+            else {
+              ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Fail')),
+                )
+            }
+          },
           child: Icon(Icons.double_arrow_rounded),
           backgroundColor: Color.fromRGBO(58, 45, 119, 1),
           elevation: 0,
@@ -108,6 +130,12 @@ class _InputField extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(12.0)),
           color: Colors.grey[100]),
       child: TextFormField(
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return "Cette question est obligatoire";
+          }
+          return null;
+        },
         style: TextStyle(color: Color.fromRGBO(58, 45, 119, 1)),
         decoration: InputDecoration(
           hintStyle: TextStyle(

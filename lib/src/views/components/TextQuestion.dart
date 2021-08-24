@@ -4,7 +4,7 @@ class TextQuestion extends StatelessWidget {
   const TextQuestion({Key? key, required this.question, required this.formKey}) : super(key: key);
 
   final String question;
-  final GlobalKey<FormState> formKey;
+  final GlobalKey<FormState> formKey; // TODO : Get rid of unused formKey
 
   @override
   Widget build(BuildContext context) {
