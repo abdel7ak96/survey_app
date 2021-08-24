@@ -84,7 +84,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
   }
 }
 
-class _FormPart extends StatelessWidget {
+class _FormPart extends StatefulWidget {
   const _FormPart({Key? key, required this.nextPage, this.formTitle = ""})
       : super(key: key);
 
@@ -92,17 +92,25 @@ class _FormPart extends StatelessWidget {
   final String formTitle;
 
   @override
+  __FormPartState createState() => __FormPartState();
+}
+
+class __FormPartState extends State<_FormPart> {
+
+  final _formKey = GlobalKey<FormState>();
+
+  @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(14.0),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          formTitle != ""
+          widget.formTitle != ""
               ? Container(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(formTitle,
+                      Text(widget.formTitle,
                           style: TextStyle(
                             fontWeight: FontWeight.w500,
                             color: Color.fromRGBO(58, 45, 119, 1),
@@ -120,14 +128,29 @@ class _FormPart extends StatelessWidget {
               // ignore: dead_code
               : SizedBox(height: 35.0),
           SizedBox(height: 35.0),
-          _TextQuestion(),
+          Form(
+            key: _formKey,
+            child: Column(
+              children: [
+                _TextQuestion(
+                  question: "Avez-vous connaissance du RGPD ?",
+                  formKey: _formKey,
+                ),
+                _TextQuestion(
+                  question: "Question 2",
+                  formKey: _formKey,
+                ),
+              ],
+            )
+          ),
           SizedBox(height: 20.0),
           Center(
               child: ElevatedButton(
             onPressed: () {
-              // TODO : Check validator
               // TODO : Save answers to state
-              nextPage();
+              if(_formKey.currentState!.validate()) {
+                widget.nextPage();
+              }
             },
             child: Text("Suivant"),
             style: ElevatedButton.styleFrom(
@@ -140,30 +163,38 @@ class _FormPart extends StatelessWidget {
 }
 
 class _TextQuestion extends StatelessWidget {
-  const _TextQuestion({Key? key}) : super(key: key);
+  const _TextQuestion({Key? key, required this.question, required this.formKey}) : super(key: key);
+
+  final String question;
+  final GlobalKey<FormState> formKey;
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.symmetric(vertical: 8.0),
       padding: EdgeInsets.all(12.0),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(14.0), color: Colors.grey[200]),
-      child: Form(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "C'est ici ou la question doit etre posser?",
-              style: TextStyle(
-                  color: Color.fromRGBO(58, 45, 119, 1),
-                  fontWeight: FontWeight.w500,
-                  fontSize: 14.0),
-            ),
-            TextFormField(
-              decoration: InputDecoration(hintText: "Réponse"),
-            )
-          ],
-        ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            question,
+            style: TextStyle(
+                color: Color.fromRGBO(58, 45, 119, 1),
+                fontWeight: FontWeight.w500,
+                fontSize: 14.0),
+          ),
+          TextFormField(
+            validator: (value) {
+              if(value == null || value.isEmpty) {
+                return "Cette question est obligatoire";
+              }
+              return null;
+            },
+            decoration: InputDecoration(hintText: "Réponse"),
+          )
+        ],
       ),
     );
   }
