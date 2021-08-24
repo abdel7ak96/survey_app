@@ -1,14 +1,14 @@
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 
-class WelcomeScreens extends StatefulWidget {
-  const WelcomeScreens({Key? key}) : super(key: key);
+class WelcomeViews extends StatefulWidget {
+  const WelcomeViews({Key? key}) : super(key: key);
 
   @override
-  _WelcomeScreensState createState() => _WelcomeScreensState();
+  _WelcomeViewsState createState() => _WelcomeViewsState();
 }
 
-class _WelcomeScreensState extends State<WelcomeScreens> {
+class _WelcomeViewsState extends State<WelcomeViews> {
   PageController _pageController = PageController();
 
   int _currentPageIndex = 0;
@@ -25,17 +25,17 @@ class _WelcomeScreensState extends State<WelcomeScreens> {
         },
         controller: _pageController,
         children: [
-          _WelcomeScreen(
+          _WelcomeView(
               imagePath: "images/1.png",
               title: "Bienvenue",
               description:
                   "Ce texte est un exemple de texte qui peut etre remplacer dans le meme espace"),
-          _WelcomeScreen(
+          _WelcomeView(
               imagePath: "images/2.png",
               title: "Bienvenue",
               description:
                   "Ce texte est un exemple de texte qui peut etre remplacer dans le meme espace"),
-          _WelcomeScreen(
+          _WelcomeView(
               imagePath: "images/3.png",
               title: "Bienvenue",
               description:
@@ -82,8 +82,8 @@ class _WelcomeScreensState extends State<WelcomeScreens> {
   }
 }
 
-class _WelcomeScreen extends StatelessWidget {
-  const _WelcomeScreen(
+class _WelcomeView extends StatelessWidget {
+  const _WelcomeView(
       {Key? key,
       this.imagePath = "images/1.png",
       this.title = "Default Title",

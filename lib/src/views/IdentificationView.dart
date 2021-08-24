@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class IdentificationScreen extends StatelessWidget {
-  const IdentificationScreen({Key? key}) : super(key: key);
+class IdentificationView extends StatelessWidget {
+  const IdentificationView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
