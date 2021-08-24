@@ -8,10 +8,12 @@ class IdentificationView extends StatefulWidget {
 }
 
 class _IdentificationViewState extends State<IdentificationView> {
+
   final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
+  final showFAB = MediaQuery.of(context).viewInsets.bottom==0.0;
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
@@ -89,26 +91,17 @@ class _IdentificationViewState extends State<IdentificationView> {
             ),
           ]),
         ),
-        // TODO : Make the floatingActionButton disappear when the keyboard is open
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        floatingActionButton: FloatingActionButton(
+        floatingActionButton: showFAB ? FloatingActionButton(
           onPressed: () => {
-            if (_formKey.currentState!.validate())
-              {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Success')),
-                )
-              }
-            else {
-              ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Fail')),
-                )
+            if (_formKey.currentState!.validate()) {
+              
             }
           },
           child: Icon(Icons.double_arrow_rounded),
           backgroundColor: Color.fromRGBO(58, 45, 119, 1),
           elevation: 0,
-        ),
+        ) : null,
         bottomNavigationBar: BottomAppBar(
           shape: CircularNotchedRectangle(),
           color: Color.fromRGBO(58, 45, 119, 1),

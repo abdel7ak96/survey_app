@@ -76,7 +76,6 @@ class _FormPart extends StatefulWidget {
 }
 
 class __FormPartState extends State<_FormPart> {
-
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -105,30 +104,26 @@ class __FormPartState extends State<_FormPart> {
                     ],
                   ),
                 )
-              // ignore: dead_code
               : SizedBox(height: 35.0),
           SizedBox(height: 35.0),
           Form(
-            key: _formKey,
-            child: Column(
-              children: [
-                TextQuestion(
-                  question: "Avez-vous connaissance du RGPD ?",
-                  formKey: _formKey,
-                ),
-                TextQuestion(
-                  question: "Question 2",
-                  formKey: _formKey,
-                ),
-              ],
-            )
-          ),
+              key: _formKey,
+              child: Column(
+                children: [
+                  TextQuestion(
+                    question: "Avez-vous connaissance du RGPD ?",
+                  ),
+                  TextQuestion(
+                    question: "Question 2",
+                  ),
+                ],
+              )),
           SizedBox(height: 20.0),
           Center(
               child: ElevatedButton(
             onPressed: () {
               // TODO : Save answers to state
-              if(_formKey.currentState!.validate()) {
+              if (_formKey.currentState!.validate()) {
                 widget.nextPage();
               }
             },
