@@ -7,6 +7,27 @@ class IdentificationView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          leading: IconButton(
+            onPressed: () => {},
+            icon: Icon(
+              Icons.arrow_back_ios,
+              color: Color.fromRGBO(58, 45, 119, 1),
+              size: 25.0,
+            ),
+          ),
+          actions: [
+            IconButton(
+                onPressed: () => {},
+                icon: Icon(
+                  Icons.settings_applications_sharp,
+                  color: Color.fromRGBO(58, 45, 119, 1),
+                  size: 25.0,
+                ))
+          ],
+        ),
         body: SafeArea(
           child: ListView(children: [
             Padding(
@@ -14,26 +35,6 @@ class IdentificationView extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // TODO : Refactor this code to use AppBar instead
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      IconButton(
-                          onPressed: () => {},
-                          icon: Icon(
-                            Icons.arrow_back_ios,
-                            color: Color.fromRGBO(58, 45, 119, 1),
-                            size: 25.0,
-                          )),
-                      IconButton(
-                          onPressed: () => {},
-                          icon: Icon(
-                            Icons.settings_applications_sharp,
-                            color: Color.fromRGBO(58, 45, 119, 1),
-                            size: 25.0,
-                          ))
-                    ],
-                  ),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 20.0),
                     child: Column(
@@ -81,7 +82,7 @@ class IdentificationView extends StatelessWidget {
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: FloatingActionButton(
-          onPressed: () => { /*TODO : Implement form validation and routing*/ },
+          onPressed: () => {/*TODO : Implement form validation and routing*/},
           child: Icon(Icons.double_arrow_rounded),
           backgroundColor: Color.fromRGBO(58, 45, 119, 1),
           elevation: 0,
@@ -90,8 +91,7 @@ class IdentificationView extends StatelessWidget {
           shape: CircularNotchedRectangle(),
           color: Color.fromRGBO(58, 45, 119, 1),
           child: SizedBox(height: 50.0),
-        )
-        );
+        ));
   }
 }
 
